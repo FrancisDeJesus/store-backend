@@ -1,11 +1,15 @@
-from django.shortcuts import render
-from rest_framework.decorators import api_view
-from rest_framework.response import Response
+from rest_framework import viewsets 
+from .models import Product
+from .serializers import ProductSerializer
 
 # Create your views here.
 
-@api_view(['GET'])
-def products(request):
-    if request.method == "GET":
-        return Response({"message": "Hello World"})
+# Viewset a class that can be inherited in which it will provide you necessary methods for CRUD and other stuff.
+ # create a viewset 
+class ProductViewSet(viewsets.ModelViewSet): 
+    # define queryset 
+    queryset = Product.objects.all() 
+      
+    # specify serializer to be used 
+    serializer_class = ProductSerializer 
 
